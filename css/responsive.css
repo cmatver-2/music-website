@@ -1,0 +1,115 @@
+/* ============================================================
+   responsive.css — Mobile & Tablet Styles
+   ============================================================
+   CONCEPT: Media Queries
+   A "media query" checks the screen width and applies styles
+   only when that condition is true.
+
+   Syntax:
+   @media (max-width: 768px) {
+     /* These styles ONLY apply when screen ≤ 768px wide */
+   }
+
+   Our breakpoints (screen size cutoffs):
+   - Desktop:  > 1024px  (default styles above handle this)
+   - Tablet:   768px – 1024px
+   - Mobile:   < 768px
+   ============================================================ */
+
+/* ---- TABLET (max-width: 1024px) ---- */
+@media (max-width: 1024px) {
+
+  /* Footer: collapse from 4 columns to 2 */
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1; /* Spans full width */
+  }
+}
+
+/* ---- MOBILE (max-width: 768px) ---- */
+@media (max-width: 768px) {
+
+  /* NAVBAR: hide links, show hamburger */
+  .nav-links {
+    display: none;              /* Hidden by default on mobile */
+    position: fixed;            /* Cover the screen */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(10, 10, 15, 0.98);
+    flex-direction: column;     /* Stack vertically */
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2xl);
+    z-index: 999;
+  }
+
+  body.light-theme .nav-links {
+    background: rgba(240, 240, 248, 0.98);
+  }
+
+  /* When JS adds .open, show the menu */
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-link {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  .hamburger {
+    display: flex; /* Show hamburger on mobile */
+    z-index: 1000;
+  }
+
+  /* FOOTER: stack everything in 1 column */
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: var(--space-sm);
+    text-align: center;
+  }
+
+  /* TOAST: smaller on mobile */
+  .toast-container {
+    right: var(--space-md);
+    left: var(--space-md);
+    bottom: var(--space-md);
+  }
+
+  .toast {
+    min-width: unset;
+    max-width: unset;
+    width: 100%;
+  }
+
+  /* SECTIONS: less padding on mobile */
+  .section {
+    padding: var(--space-2xl) 0;
+  }
+
+  .container {
+    padding: 0 var(--space-md);
+  }
+}
+
+/* ---- SMALL MOBILE (max-width: 480px) ---- */
+@media (max-width: 480px) {
+  .btn {
+    padding: 0.65rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  .page-header {
+    padding: 6rem 0 3rem;
+  }
+}

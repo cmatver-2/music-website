@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BeatWave — Contact</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/contact.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <div class="container">
+        <a href="index.html" class="nav-logo"><div class="logo-icon">♪</div>Beat<span class="accent-text">Wave</span></a>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="music.html" class="nav-link">Music</a></li>
+          <li><a href="artist.html" class="nav-link">Artist</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+          <button class="theme-toggle"><span class="theme-icon">🌙</span></button>
+          <button class="hamburger"><span></span><span></span><span></span></button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <div class="container">
+        <h1>Get in <span class="gradient-text">Touch</span></h1>
+        <p>We'd love to hear from you</p>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <div class="contact-layout">
+
+          <!-- Contact Form -->
+          <div class="contact-form-wrap" data-reveal>
+            <h2 class="form-heading">Send a Message</h2>
+
+            <!--
+              CONCEPT: The <form> element groups input fields.
+              novalidate disables browser's built-in validation
+              so our JS validation runs instead (we have more control).
+              id="contact-form" lets JS find this form.
+            -->
+            <form id="contact-form" novalidate>
+
+              <!-- Name Field -->
+              <div class="form-group">
+                <label for="name">Full Name *</label>
+                <!--
+                  CONCEPT: id and for must MATCH to link the label to the input.
+                  This improves accessibility — clicking the label focuses the input.
+                  name attribute is used when forms submit to a server.
+                -->
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Your full name"
+                  autocomplete="name"
+                >
+                <span class="error-msg" id="name-error">Name is required.</span>
+              </div>
+
+              <!-- Email Field -->
+              <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="you@example.com"
+                  autocomplete="email"
+                >
+                <span class="error-msg" id="email-error">Please enter a valid email address.</span>
+              </div>
+
+              <!-- Phone Field -->
+              <div class="form-group">
+                <label for="phone">Phone Number *</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  placeholder="10-digit phone number"
+                  maxlength="10"
+                  autocomplete="tel"
+                >
+                <span class="error-msg" id="phone-error">Phone must be exactly 10 digits.</span>
+              </div>
+
+              <!-- Message Field -->
+              <div class="form-group">
+                <label for="message">Message * <span class="optional-note">(max 200 words)</span></label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="5"
+                  placeholder="Tell us about your query, feedback, or anything you'd like to share..."
+                ></textarea>
+                <!-- Character counter updated by JS -->
+                <div class="char-counter" id="word-counter">0 / 200 words</div>
+                <span class="error-msg" id="message-error">Message is required and must not exceed 200 words.</span>
+              </div>
+
+              <button type="submit" class="btn btn-primary submit-btn">
+                <span class="btn-text">Send Message ✉️</span>
+                <span class="btn-loading" style="display:none">Sending...</span>
+              </button>
+
+            </form>
+          </div>
+
+          <!-- Contact Info Sidebar -->
+          <aside class="contact-info" data-reveal>
+
+            <div class="info-card">
+              <div class="info-icon">📍</div>
+              <h3>Our Location</h3>
+              <p>Kochi, Kerala, India — 682001</p>
+            </div>
+
+            <div class="info-card">
+              <div class="info-icon">📞</div>
+              <h3>Phone</h3>
+              <p>+91 98765 43210</p>
+              <p>Mon–Sat, 9AM–6PM IST</p>
+            </div>
+
+            <div class="info-card">
+              <div class="info-icon">✉️</div>
+              <h3>Email</h3>
+              <p>hello@beatwave.com</p>
+              <p>We reply within 24 hours</p>
+            </div>
+
+            <div class="info-card">
+              <div class="info-icon">🌐</div>
+              <h3>Follow Us</h3>
+              <div class="info-social">
+                <a href="#" class="social-link">📸 Instagram</a>
+                <a href="#" class="social-link">🐦 Twitter</a>
+                <a href="#" class="social-link">▶️ YouTube</a>
+              </div>
+            </div>
+
+          </aside>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo"><div class="logo-icon">♪</div>Beat<span class="accent-text">Wave</span></div>
+          <p>Your gateway to independent music.</p>
+          <div class="footer-social">
+            <a href="#" class="social-btn">📸</a><a href="#" class="social-btn">🐦</a>
+            <a href="#" class="social-btn">▶️</a><a href="#" class="social-btn">🎵</a>
+          </div>
+        </div>
+        <div class="footer-col"><h4>Navigate</h4><ul>
+          <li><a href="index.html">Home</a></li><li><a href="music.html">Music</a></li>
+          <li><a href="artist.html">Artists</a></li><li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul></div>
+        <div class="footer-col"><h4>Genres</h4><ul>
+          <li><a href="#">Pop</a></li><li><a href="#">Rock</a></li>
+          <li><a href="#">Hip-Hop</a></li><li><a href="#">Electronic</a></li>
+        </ul></div>
+        <div class="footer-col"><h4>Legal</h4><ul>
+          <li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Use</a></li>
+        </ul></div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 BeatWave. All rights reserved.</p>
+        <p>Made with HTML · CSS · JavaScript</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast-container"></div>
+  <script src="js/main.js"></script>
+  <script src="js/contact.js"></script>
+</body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BeatWave — Music</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/music.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- NAVBAR (same as index.html) -->
+  <header>
+    <nav class="navbar" role="navigation">
+      <div class="container">
+        <a href="index.html" class="nav-logo">
+          <div class="logo-icon">♪</div>
+          Beat<span class="accent-text">Wave</span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="index.html"   class="nav-link">Home</a></li>
+          <li><a href="music.html"   class="nav-link">Music</a></li>
+          <li><a href="artist.html"  class="nav-link">Artist</a></li>
+          <li><a href="about.html"   class="nav-link">About</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+          <button class="theme-toggle" aria-label="Toggle theme">
+            <span class="theme-icon">🌙</span>
+          </button>
+          <button class="hamburger" aria-label="Open menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Page header -->
+    <div class="page-header">
+      <div class="container">
+        <h1>🎵 Music <span class="gradient-text">Library</span></h1>
+        <p>Stream and discover amazing tracks</p>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="container">
+
+        <!-- Search & Filter Bar -->
+        <!--
+          CONCEPT: The search input has an 'id' so JS can target it.
+          The filter buttons use data-filter attribute — our JS reads
+          this to know which genre to filter by.
+        -->
+        <div class="music-controls" data-reveal>
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input
+              type="text"
+              id="music-search"
+              class="search-input"
+              placeholder="Search songs, artists..."
+              autocomplete="off"
+            >
+          </div>
+          <div class="filter-btns">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="pop">Pop</button>
+            <button class="filter-btn" data-filter="hiphop">Hip-Hop</button>
+            <button class="filter-btn" data-filter="electronic">Electronic</button>
+            <button class="filter-btn" data-filter="lofi">Lo-Fi</button>
+            <button class="filter-btn" data-filter="rock">Rock</button>
+          </div>
+        </div>
+
+        <!-- Music Grid -->
+        <!--
+          CONCEPT: Each card has:
+          - data-genre: used by JS to show/hide when filtering
+          - data-song, data-artist: used by JS to play the right audio
+          The real audio would be in audio/song1.mp3 etc.
+          For demo, we use a placeholder audio (blank).
+        -->
+        <div class="music-grid" id="music-grid">
+
+          <!-- SONG 1 -->
+          <article class="music-card card" data-genre="lofi" data-reveal>
+            <div class="music-card-art art-1">
+              <div class="art-overlay">
+                <button
+                  class="play-pause-btn"
+                  data-src="audio/song1.mp3"
+                  data-song="Midnight Drive"
+                  aria-label="Play Midnight Drive"
+                >
+                  <span class="play-icon">▶</span>
+                </button>
+              </div>
+              <div class="music-waves" style="display:none">
+                <span></span><span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+
+            <div class="music-card-body">
+              <div class="music-info">
+                <h3 class="music-name">Midnight Drive</h3>
+                <p class="music-artist">Luna Rivers</p>
+                <span class="music-genre-tag">Lo-Fi</span>
+              </div>
+              <div class="music-contact">
+                <span class="contact-icon">📞</span>
+                <span class="contact-number">+91 98765 43210</span>
+              </div>
+              <div class="music-card-actions">
+                <button
+                  class="btn btn-primary btn-sm play-pause-btn"
+                  data-src="audio/song1.mp3"
+                  data-song="Midnight Drive"
+                >
+                  ▶ Play
+                </button>
+                <a href="artist.html?id=1" class="btn-icon view-artist-btn" title="View Artist">
+                  👤
+                </a>
+                <button class="btn-icon fav-btn" onclick="toggleFavorite(this, 'Midnight Drive')" title="Favorite">
+                  🤍
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- SONG 2 -->
+          <article class="music-card card" data-genre="electronic" data-reveal>
+            <div class="music-card-art art-2">
+              <div class="art-overlay">
+                <button class="play-pause-btn" data-src="audio/song2.mp3" data-song="Solar Winds" aria-label="Play Solar Winds">
+                  <span class="play-icon">▶</span>
+                </button>
+              </div>
+              <div class="music-waves" style="display:none">
+                <span></span><span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+            <div class="music-card-body">
+              <div class="music-info">
+                <h3 class="music-name">Solar Winds</h3>
+                <p class="music-artist">Axis & Echo</p>
+                <span class="music-genre-tag">Electronic</span>
+              </div>
+              <div class="music-contact">
+                <span class="contact-icon">📞</span>
+                <span class="contact-number">+91 87654 32109</span>
+              </div>
+              <div class="music-card-actions">
+                <button class="btn btn-primary btn-sm play-pause-btn" data-src="audio/song2.mp3" data-song="Solar Winds">▶ Play</button>
+                <a href="artist.html?id=2" class="btn-icon" title="View Artist">👤</a>
+                <button class="btn-icon fav-btn" onclick="toggleFavorite(this, 'Solar Winds')" title="Favorite">🤍</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- SONG 3 -->
+          <article class="music-card card" data-genre="electronic" data-reveal>
+            <div class="music-card-art art-3">
+              <div class="art-overlay">
+                <button class="play-pause-btn" data-src="audio/song3.mp3" data-song="Neon Jungle" aria-label="Play Neon Jungle">
+                  <span class="play-icon">▶</span>
+                </button>
+              </div>
+              <div class="music-waves" style="display:none">
+                <span></span><span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+            <div class="music-card-body">
+              <div class="music-info">
+                <h3 class="music-name">Neon Jungle</h3>
+                <p class="music-artist">The Midnight Heist</p>
+                <span class="music-genre-tag">Synthwave</span>
+              </div>
+              <div class="music-contact">
+                <span class="contact-icon">📞</span>
+                <span class="contact-number">+91 76543 21098</span>
+              </div>
+              <div class="music-card-actions">
+                <button class="btn btn-primary btn-sm play-pause-btn" data-src="audio/song3.mp3" data-song="Neon Jungle">▶ Play</button>
+                <a href="artist.html?id=3" class="btn-icon" title="View Artist">👤</a>
+                <button class="btn-icon fav-btn" onclick="toggleFavorite(this, 'Neon Jungle')" title="Favorite">🤍</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- SONG 4 -->
+          <article class="music-card card" data-genre="pop" data-reveal>
+            <div class="music-card-art art-4">
+              <div class="art-overlay">
+                <button class="play-pause-btn" data-src="audio/song4.mp3" data-song="Starfall" aria-label="Play Starfall">
+                  <span class="play-icon">▶</span>
+                </button>
+              </div>
+              <div class="music-waves" style="display:none">
+                <span></span><span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+            <div class="music-card-body">
+              <div class="music-info">
+                <h3 class="music-name">Starfall</h3>
+                <p class="music-artist">Nova Skye</p>
+                <span class="music-genre-tag">Pop</span>
+              </div>
+              <div class="music-contact">
+                <span class="contact-icon">📞</span>
+                <span class="contact-number">+91 65432 10987</span>
+              </div>
+              <div class="music-card-actions">
+                <button class="btn btn-primary btn-sm play-pause-btn" data-src="audio/song4.mp3" data-song="Starfall">▶ Play</button>
+                <a href="artist.html?id=4" class="btn-icon" title="View Artist">👤</a>
+                <button class="btn-icon fav-btn" onclick="toggleFavorite(this, 'Starfall')" title="Favorite">🤍</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- SONG 5 -->
+          <article class="music-card card" data-genre="hiphop" data-reveal>
+            <div class="music-card-art art-5">
+              <div class="art-overlay">
+                <button class="play-pause-btn" data-src="audio/song5.mp3" data-song="City Lights" aria-label="Play City Lights">
+                  <span class="play-icon">▶</span>
+                </button>
+              </div>
+              <div class="music-waves" style="display:none">
+                <span></span><span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+            <div class="music-card-body">
+              <div class="music-info">
+                <h3 class="music-name">City Lights</h3>
+                <p class="music-artist">Raze & Reflect</p>
+                <span class="music-genre-tag">Hip-Hop</span>
+              </div>
+              <div class="music-contact">
+                <span class="contact-icon">📞</span>
+                <span class="contact-number">+91 54321 09876</span>
+              </div>
+              <div class="music-card-actions">
+                <button class="btn btn-primary btn-sm play-pause-btn" data-src="audio/song5.mp3" data-song="City Lights">▶ Play</button>
+                <a href="artist.html?id=5" class="btn-icon" title="View Artist">👤</a>
+                <button class="btn-icon fav-btn" onclick="toggleFavorite(this, 'City Lights')" title="Favorite">🤍</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- SONG 6 -->
+          <article class="music-card card" data-genre="rock" data-reveal>
+            <div class="music-card-art art-6">
+              <div class="art-overlay">
+                <button class="play-pause-btn" data-src="audio/song6.mp3" data-song="Thunder Road" aria-label="Play Thunder Road">
+                  <span class="play-icon">▶</span>
+                </button>
+              </div>
+              <div class="music-waves" style="display:none">
+                <span></span><span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+            <div class="music-card-body">
+              <div class="music-info">
+                <h3 class="music-name">Thunder Road</h3>
+                <p class="music-artist">Iron Solstice</p>
+                <span class="music-genre-tag">Rock</span>
+              </div>
+              <div class="music-contact">
+                <span class="contact-icon">📞</span>
+                <span class="contact-number">+91 43210 98765</span>
+              </div>
+              <div class="music-card-actions">
+                <button class="btn btn-primary btn-sm play-pause-btn" data-src="audio/song6.mp3" data-song="Thunder Road">▶ Play</button>
+                <a href="artist.html?id=6" class="btn-icon" title="View Artist">👤</a>
+                <button class="btn-icon fav-btn" onclick="toggleFavorite(this, 'Thunder Road')" title="Favorite">🤍</button>
+              </div>
+            </div>
+          </article>
+
+        </div><!-- /music-grid -->
+
+        <!-- No results message (hidden by default) -->
+        <div class="no-results" id="no-results" style="display:none">
+          <p>😕 No songs found. Try a different search.</p>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER (same as index.html) -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <div class="logo-icon">♪</div>Beat<span class="accent-text">Wave</span>
+          </div>
+          <p>Your gateway to independent music.</p>
+          <div class="footer-social">
+            <a href="#" class="social-btn">📸</a>
+            <a href="#" class="social-btn">🐦</a>
+            <a href="#" class="social-btn">▶️</a>
+            <a href="#" class="social-btn">🎵</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="music.html">Music</a></li>
+            <li><a href="artist.html">Artists</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Genres</h4>
+          <ul>
+            <li><a href="#">Pop</a></li>
+            <li><a href="#">Rock</a></li>
+            <li><a href="#">Hip-Hop</a></li>
+            <li><a href="#">Electronic</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Use</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 BeatWave. All rights reserved.</p>
+        <p>Made with HTML · CSS · JavaScript</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast-container"></div>
+  <script src="js/main.js"></script>
+  <script src="js/home.js"></script>
+  <script src="js/music.js"></script>
+</body>
+</html>

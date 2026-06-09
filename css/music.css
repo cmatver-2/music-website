@@ -1,0 +1,259 @@
+/* ============================================================
+   music.css — Styles for the Music page
+   ============================================================ */
+
+/* --- SEARCH & FILTER BAR ----------------------------------- */
+.music-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin-bottom: var(--space-2xl);
+  padding: var(--space-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.search-box {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+  max-width: 400px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.8rem;
+  background: var(--color-surface-2);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-full);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color var(--transition);
+}
+
+.search-input:focus {
+  border-color: var(--color-accent);
+}
+
+.filter-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.filter-btn {
+  padding: 0.5rem 1.1rem;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+
+/* --- MUSIC GRID -------------------------------------------- */
+.music-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+}
+
+/* --- MUSIC CARD -------------------------------------------- */
+.music-card {
+  transition: all var(--transition);
+}
+
+/* Album art area */
+.music-card-art {
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Color gradients for each card (since we have no real images) */
+.art-1 { background: linear-gradient(135deg, #667eea, #764ba2); }
+.art-2 { background: linear-gradient(135deg, #f093fb, #f5576c); }
+.art-3 { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+.art-4 { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+.art-5 { background: linear-gradient(135deg, #fa709a, #fee140); }
+.art-6 { background: linear-gradient(135deg, #a18cd1, #fbc2eb); }
+
+.art-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.music-card-art:hover .art-overlay {
+  opacity: 1;
+}
+
+/* Play/Pause button on art */
+.play-pause-btn {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.9);
+  color: var(--color-accent);
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: transform var(--transition);
+  font-weight: bold;
+}
+
+.play-pause-btn:hover { transform: scale(1.1); }
+
+/* Playing state — card glows */
+.music-card.playing {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px var(--color-accent), var(--shadow-card);
+}
+
+.music-card.playing .art-overlay {
+  opacity: 1; /* Always show overlay when playing */
+}
+
+/* Sound wave animation (shows when playing) */
+.music-waves {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+}
+
+.music-waves span {
+  display: block;
+  width: 4px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.8);
+  animation: wave 0.8s ease-in-out infinite;
+}
+
+/* Each bar has different height and delay for organic look */
+.music-waves span:nth-child(1) { height: 10px; animation-delay: 0.0s; }
+.music-waves span:nth-child(2) { height: 20px; animation-delay: 0.1s; }
+.music-waves span:nth-child(3) { height: 14px; animation-delay: 0.2s; }
+.music-waves span:nth-child(4) { height: 20px; animation-delay: 0.3s; }
+.music-waves span:nth-child(5) { height: 10px; animation-delay: 0.4s; }
+
+@keyframes wave {
+  0%, 100% { transform: scaleY(0.5); }
+  50%       { transform: scaleY(1); }
+}
+
+/* Card body */
+.music-card-body {
+  padding: var(--space-lg);
+}
+
+.music-info { margin-bottom: var(--space-md); }
+
+.music-name {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.music-artist {
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+  margin-bottom: var(--space-sm);
+}
+
+.music-genre-tag {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  background: rgba(124, 58, 237, 0.15);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Contact info row */
+.music-contact {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+  padding: var(--space-sm);
+  background: var(--color-surface-2);
+  border-radius: var(--radius-sm);
+}
+
+.music-card-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+/* No results state */
+.no-results {
+  text-align: center;
+  padding: var(--space-3xl);
+  color: var(--color-text-muted);
+  font-size: 1.2rem;
+}
+
+/* Card hidden by filter */
+.music-card.hidden {
+  display: none;
+}
+
+/* --- RESPONSIVE -------------------------------------------- */
+@media (max-width: 1024px) {
+  .music-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .music-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-box {
+    max-width: 100%;
+  }
+
+  .music-grid {
+    grid-template-columns: 1fr;
+  }
+}

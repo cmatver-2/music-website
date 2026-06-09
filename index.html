@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<!--
+  CONCEPT: <!DOCTYPE html> tells the browser "this is modern HTML5".
+  Always the FIRST line of every HTML file.
+-->
+<html lang="en">
+<!--
+  CONCEPT: <html> is the ROOT element — everything lives inside it.
+  lang="en" helps screen readers and search engines.
+-->
+
+<head>
+  <!--
+    CONCEPT: <head> contains METADATA — info about the page
+    that doesn't display in the browser window directly.
+    Think of it as the page's "settings".
+  -->
+  <meta charset="UTF-8">
+  <!--
+    UTF-8: character encoding — ensures special characters
+    like ©, é, ♪ display correctly.
+  -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--
+    CRITICAL for responsive design!
+    width=device-width: page width = screen width
+    initial-scale=1.0: don't zoom in/out on load
+    Without this, mobile browsers zoom out to show desktop version.
+  -->
+
+  <meta name="description" content="BeatWave — Discover and stream the music you love">
+  <!-- Used by search engines and when sharing the link -->
+
+  <title>BeatWave — Home</title>
+  <!-- Tab title in the browser -->
+
+  <!-- Google Fonts: load our custom fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!--
+    CONCEPT: Link external CSS files.
+    The browser reads these files and applies the styles.
+    ORDER MATTERS: style.css first (base), responsive.css second (overrides).
+  -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+  <!--
+    CONCEPT: <body> contains everything VISIBLE on the page.
+    We structure it with SEMANTIC HTML tags:
+    <header>, <nav>, <main>, <section>, <footer>
+    These tags tell the browser (and screen readers) what
+    each part of the page IS, not just how it looks.
+  -->
+
+  <!-- ═══════════════════════════════════════════════════════
+       NAVIGATION BAR
+       Used on ALL pages — same code, copy-paste to other pages.
+       ═══════════════════════════════════════════════════════ -->
+  <header>
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+      <div class="container">
+
+        <!-- Logo -->
+        <a href="index.html" class="nav-logo">
+          <div class="logo-icon">♪</div>
+          Beat<span class="accent-text">Wave</span>
+        </a>
+
+        <!-- Navigation Links -->
+        <!-- CONCEPT: <ul> = unordered list, <li> = list item.
+             Using a list for nav links is semantic HTML best practice. -->
+        <ul class="nav-links">
+          <li><a href="index.html"   class="nav-link">Home</a></li>
+          <li><a href="music.html"   class="nav-link">Music</a></li>
+          <li><a href="artist.html"  class="nav-link">Artist</a></li>
+          <li><a href="about.html"   class="nav-link">About</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+
+        <!-- Actions: theme toggle + hamburger -->
+        <div class="nav-actions">
+          <button class="theme-toggle" aria-label="Toggle theme">
+            <span class="theme-icon">🌙</span>
+          </button>
+          <!-- Hamburger: 3 spans become the 3 lines -->
+          <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+
+      </div>
+    </nav>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════
+       MAIN CONTENT
+       ═══════════════════════════════════════════════════════ -->
+  <main>
+
+    <!-- ── HERO / BANNER SECTION ──────────────────────────── -->
+    <!--
+      CONCEPT: The "hero" is the first big section users see.
+      data-reveal is a custom attribute our JS watches to
+      animate elements as they scroll into view.
+    -->
+    <section class="hero" id="home">
+      <!-- Background animated orbs (decorative) -->
+      <div class="hero-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+      </div>
+
+      <div class="container">
+        <div class="hero-content" data-reveal>
+
+          <div class="hero-badge">
+            <span class="badge-dot"></span>
+            Now Playing Worldwide
+          </div>
+
+          <h1 class="hero-title">
+            Feel the Music.<br>
+            <span class="gradient-text">Live the Sound.</span>
+          </h1>
+
+          <p class="hero-subtitle">
+            Discover thousands of tracks from independent artists worldwide.
+            Stream, connect, and let the beat move you.
+          </p>
+
+          <div class="hero-actions">
+            <a href="music.html" class="btn btn-primary">
+              🎵 Explore Music
+            </a>
+            <a href="about.html" class="btn btn-outline">
+              Learn More
+            </a>
+          </div>
+
+          <!-- Floating music stats -->
+          <div class="hero-stats">
+            <div class="stat">
+              <span class="stat-number">500+</span>
+              <span class="stat-label">Songs</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+              <span class="stat-number">120</span>
+              <span class="stat-label">Artists</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+              <span class="stat-number">50K</span>
+              <span class="stat-label">Listeners</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Floating album art preview -->
+        <div class="hero-visual" data-reveal>
+          <div class="vinyl-disc">
+            <div class="vinyl-inner"></div>
+            <div class="vinyl-label">♪</div>
+          </div>
+          <div class="floating-card card-1">
+            <span>🎵</span> Playing Now
+          </div>
+          <div class="floating-card card-2">
+            <span>❤️</span> 2.4K Likes
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FEATURED MUSIC SECTION ─────────────────────────── -->
+    <section class="section featured-section" id="featured">
+      <div class="container">
+
+        <div class="section-header" data-reveal>
+          <h2 class="section-title">
+            Featured <span class="gradient-text">Tracks</span>
+          </h2>
+          <p class="section-subtitle">
+            Hand-picked songs trending this week
+          </p>
+          <a href="music.html" class="btn btn-outline">View All Music →</a>
+        </div>
+
+        <!--
+          CONCEPT: We're creating PLACEHOLDER cards here.
+          In a real app, these would be generated dynamically
+          by JavaScript fetching from a database.
+          For now, we hard-code 3 sample cards.
+        -->
+        <div class="featured-grid">
+
+          <!-- Featured Card 1 -->
+          <article class="featured-card card" data-reveal>
+            <div class="card-image">
+              <!-- Placeholder gradient background instead of real image -->
+              <div class="album-art art-1">
+                <div class="album-art-overlay">
+                  <button class="play-btn-large" onclick="showToast('🎵 Playing: Midnight Drive', 'info')">
+                    ▶
+                  </button>
+                </div>
+              </div>
+              <span class="card-badge">Trending #1</span>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Midnight Drive</h3>
+              <p class="card-artist">by Luna Rivers</p>
+              <div class="card-meta">
+                <span class="card-genre">Lo-Fi / Chill</span>
+                <span class="card-duration">3:45</span>
+              </div>
+              <div class="card-actions">
+                <!-- onclick runs JS when clicked -->
+                <button class="btn btn-primary btn-sm" onclick="showToast('🎵 Playing: Midnight Drive', 'info')">
+                  ▶ Play
+                </button>
+                <a href="artist.html?artist=luna-rivers" class="btn-icon" title="View Artist">👤</a>
+                <button class="btn-icon fav-btn" onclick="toggleFavorite(this, 'Midnight Drive')" title="Add to Favorites">
+                  🤍
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Featured Card 2 -->
+          <article class="featured-card card" data-reveal>
+            <div class="card-image">
+              <div class="album-art art-2">
+                <div class="album-art-overlay">
+                  <button class="play-btn-large" onclick="showToast('🎵 Playing: Solar Winds', 'info')">▶</button>
+                </div>
+              </div>
+              <span class="card-badge new-badge">New</span>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Solar Winds</h3>
+              <p class="card-artist">by Axis & Echo</p>
+              <div class="card-meta">
+                <span class="card-genre">Electronic</span>
+                <span class="card-duration">4:12</span>
+              </div>
+              <div class="card-actions">
+                <button class="btn btn-primary btn-sm" onclick="showToast('🎵 Playing: Solar Winds', 'info')">
+                  ▶ Play
+                </button>
+                <a href="artist.html?artist=axis-echo" class="btn-icon" title="View Artist">👤</a>
+                <button class="btn-icon fav-btn" onclick="toggleFavorite(this, 'Solar Winds')" title="Add to Favorites">
+                  🤍
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Featured Card 3 -->
+          <article class="featured-card card" data-reveal>
+            <div class="card-image">
+              <div class="album-art art-3">
+                <div class="album-art-overlay">
+                  <button class="play-btn-large" onclick="showToast('🎵 Playing: Neon Jungle', 'info')">▶</button>
+                </div>
+              </div>
+              <span class="card-badge">Hot 🔥</span>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Neon Jungle</h3>
+              <p class="card-artist">by The Midnight Heist</p>
+              <div class="card-meta">
+                <span class="card-genre">Synthwave</span>
+                <span class="card-duration">5:08</span>
+              </div>
+              <div class="card-actions">
+                <button class="btn btn-primary btn-sm" onclick="showToast('🎵 Playing: Neon Jungle', 'info')">
+                  ▶ Play
+                </button>
+                <a href="artist.html?artist=midnight-heist" class="btn-icon" title="View Artist">👤</a>
+                <button class="btn-icon fav-btn" onclick="toggleFavorite(this, 'Neon Jungle')" title="Add to Favorites">
+                  🤍
+                </button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── GENRE SECTION ──────────────────────────────────── -->
+    <section class="section genre-section">
+      <div class="container">
+
+        <div class="section-header" data-reveal>
+          <h2 class="section-title">Browse by <span class="gradient-text">Genre</span></h2>
+          <p class="section-subtitle">Find your vibe</p>
+        </div>
+
+        <div class="genre-grid" data-reveal>
+          <a href="music.html?genre=pop" class="genre-card">
+            <span class="genre-icon">🎤</span>
+            <span>Pop</span>
+          </a>
+          <a href="music.html?genre=hiphop" class="genre-card">
+            <span class="genre-icon">🎧</span>
+            <span>Hip-Hop</span>
+          </a>
+          <a href="music.html?genre=electronic" class="genre-card">
+            <span class="genre-icon">🎛️</span>
+            <span>Electronic</span>
+          </a>
+          <a href="music.html?genre=rock" class="genre-card">
+            <span class="genre-icon">🎸</span>
+            <span>Rock</span>
+          </a>
+          <a href="music.html?genre=jazz" class="genre-card">
+            <span class="genre-icon">🎷</span>
+            <span>Jazz</span>
+          </a>
+          <a href="music.html?genre=lofi" class="genre-card">
+            <span class="genre-icon">🌙</span>
+            <span>Lo-Fi</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════════════════
+       FOOTER — same on all pages
+       ═══════════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+
+        <!-- Brand column -->
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <div class="logo-icon">♪</div>
+            Beat<span class="accent-text">Wave</span>
+          </div>
+          <p>Your gateway to independent music. Discover artists, stream tracks, and feel the rhythm.</p>
+          <div class="footer-social">
+            <a href="#" class="social-btn" aria-label="Instagram">📸</a>
+            <a href="#" class="social-btn" aria-label="Twitter">🐦</a>
+            <a href="#" class="social-btn" aria-label="YouTube">▶️</a>
+            <a href="#" class="social-btn" aria-label="Spotify">🎵</a>
+          </div>
+        </div>
+
+        <!-- Quick links -->
+        <div class="footer-col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="music.html">Music</a></li>
+            <li><a href="artist.html">Artists</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Genres -->
+        <div class="footer-col">
+          <h4>Genres</h4>
+          <ul>
+            <li><a href="music.html?genre=pop">Pop</a></li>
+            <li><a href="music.html?genre=rock">Rock</a></li>
+            <li><a href="music.html?genre=hiphop">Hip-Hop</a></li>
+            <li><a href="music.html?genre=electronic">Electronic</a></li>
+            <li><a href="music.html?genre=jazz">Jazz</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal -->
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Use</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Copyright bar -->
+      <div class="footer-bottom">
+        <p>© 2025 BeatWave. All rights reserved. Built with ❤️ for music lovers.</p>
+        <p>Made with HTML · CSS · JavaScript</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast container (JS creates toasts inside this) -->
+  <div class="toast-container"></div>
+
+  <!--
+    CONCEPT: Scripts go at the END of <body>.
+    WHY? The browser reads HTML top to bottom.
+    If JS loads before the HTML elements exist, it can't
+    find them. Putting scripts at the bottom ensures all
+    elements are ready.
+
+    main.js runs on EVERY page.
+    home.js only runs on the home page.
+  -->
+  <script src="js/main.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

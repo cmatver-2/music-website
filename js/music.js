@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const icon = b.querySelector('.play-icon');
         if (icon) icon.textContent = '⏸';         // Change ▶ to ⏸
         if (b.tagName === 'BUTTON' && b.classList.contains('btn-primary')) {
-          b.textContent = '⏸ Pause';
+          b.textContent = '⏸';
         }
       });
       if (waves) waves.style.display = 'flex';    // Show sound waves
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const icon = b.querySelector('.play-icon');
       if (icon) icon.textContent = '▶';
       if (b.tagName === 'BUTTON' && b.classList.contains('btn-primary')) {
-        b.textContent = '▶ Play';
+        b.textContent = '▶';
       }
     });
 

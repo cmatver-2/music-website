@@ -79,6 +79,12 @@ document.addEventListener('DOMContentLoaded', function () {
       showError('name-error', nameInput, 'Name must be at least 2 characters.');
       return false;
     }
+    // Only allow letters, spaces, dots, hyphens (for names like "St. John" or "Mary-Jane")
+    const nameRegex = /^[a-zA-Z\s.\-']+$/;
+    if (!nameRegex.test(val)) {
+      showError('name-error', nameInput, 'Name can only contain letters, spaces, hyphens, or apostrophes.');
+      return false;
+    }
     clearError('name-error', nameInput);
     return true;
   }

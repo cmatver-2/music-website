@@ -12,6 +12,17 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
+  // Read genre from URL and activate filter on page load
+  // e.g. music.html?genre=pop → activates the "Pop" filter
+  const urlParams = new URLSearchParams(window.location.search);
+  const genreParam = urlParams.get('genre');
+  if (genreParam) {
+    const matchingBtn = document.querySelector(`.filter-btn[data-filter="${genreParam}"]`);
+    if (matchingBtn) {
+      matchingBtn.click(); // Simulate a click to activate the filter
+    }
+  }
+
   // ── STEP 1: AUDIO PLAYER SETUP ──────────────────────────
   // CONCEPT: new Audio() creates an HTML audio player in JS.
   // We don't put it in HTML — JS creates it invisibly.

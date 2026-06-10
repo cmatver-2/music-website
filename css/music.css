@@ -130,6 +130,10 @@
   cursor: pointer;
   transition: transform var(--transition);
   font-weight: bold;
+  line-height: 1;            /* ADD: prevents line height from pushing content */
+  padding: 0;                /* ADD: removes any default button padding */
+  text-align: center;        /* ADD: fallback centering */
+  letter-spacing: 0;         /* ADD: ▶ has extra spacing in some fonts */
 }
 
 .play-pause-btn:hover { transform: scale(1.1); }

@@ -215,10 +215,8 @@ document.addEventListener('DOMContentLoaded', function () {
   // e.g. music.html?genre=pop → activates the "Pop" filter
   const urlParams = new URLSearchParams(window.location.search);
   const genreParam = urlParams.get('genre');
-  console.log('Genre from URL:', genreParam);
   if (genreParam) {
     const matchingBtn = document.querySelector(`.filter-btn[data-filter="${genreParam}"]`);
-    console.log('Matching button found:', matchingBtn);  // check if selector works
     if (matchingBtn) {
       matchingBtn.click(); // Simulate a click to activate the filter
     }

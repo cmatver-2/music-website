@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const songName = btn.dataset.song;
 
       // Find the parent card (closest ancestor with .music-card class)
-      const card = btn.closest('.music-card');
+      const card = btn.closest('.music-card,.featured-card');
 
       // ── Logic: Is this song already playing? ──
       if (currentlyPlayingCard === card && !audioPlayer.paused) {

@@ -92,7 +92,6 @@
   overflow: hidden;
 }
 
-/* Color gradients for each card (since we have no real images) */
 .art-1 { background-image: url('../images/FASS.webp'); background-size: cover; background-position: center; }
 .art-2 { background-image: url('../images/light-stock.webp'); background-size: cover; background-position: center; }
 .art-3 { background-image: url('../images/artur-aravidi.webp'); background-size: cover; background-position: center; }
@@ -146,6 +145,10 @@
 
 .music-card.playing .art-overlay {
   opacity: 1; /* Always show overlay when playing */
+}
+
+.featured-card.playing .album-art-overlay {
+  opacity: 1;
 }
 
 /* Sound wave animation (shows when playing) */

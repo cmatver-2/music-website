@@ -46,6 +46,7 @@
   -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/music.css"> <!-- New CSS for music page -->
   <link rel="stylesheet" href="css/responsive.css">
   <!-- Tells browser not to request a favicon file -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♪</text></svg>">
@@ -207,17 +208,20 @@
         <div class="featured-grid">
 
           <!-- Featured Card 1 -->
+
           <article class="featured-card card" data-reveal>
             <div class="card-image">
-              <!-- Placeholder gradient background instead of real image -->
               <div class="album-art art-1">
                 <div class="album-art-overlay">
-                  <button class="play-btn-large" onclick="showToast('🎵 Playing: Lofi Study', 'info')">
-                    ▶
+                  <button class="play-pause-btn" data-src="audio/song1.mp3" data-song="Lofi Study" aria-label="Play Lofi Study">
+                  <span class="play-icon">▶</span>
                   </button>
                 </div>
+                <div class="music-waves" style="display:none">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
               </div>
-              <span class="card-badge">Trending #1</span>
+              <span class="card-badge new-badge">Trending #1</span>
             </div>
             <div class="card-body">
               <h3 class="card-title">Lofi Study</h3>
@@ -227,11 +231,11 @@
                 <span class="card-duration">2:27</span>
               </div>
               <div class="card-actions">
-                <!-- onclick runs JS when clicked -->
-                <button class="btn btn-primary btn-sm" onclick="showToast('🎵 Playing: Lofi Study', 'info')">
-                  ▶ Play
+                <button class="btn btn-primary btn-sm play-pause-btn" 
+                  data-src="audio/song1.mp3" 
+                  data-song="Lofi Study">▶
                 </button>
-                <a href="artist.html?artist=luna-rivers" class="btn-icon" title="View Artist">👤</a>
+                <a href="artist.html?artist=FASS" class="btn-icon" title="View Artist">👤</a>
                 <button class="btn-icon fav-btn" onclick="toggleFavorite(this, 'Lofi Study')" title="Add to Favorites">
                   🤍
                 </button>
@@ -239,12 +243,18 @@
             </div>
           </article>
 
+          
           <!-- Featured Card 2 -->
           <article class="featured-card card" data-reveal>
             <div class="card-image">
               <div class="album-art art-2">
                 <div class="album-art-overlay">
-                  <button class="play-btn-large" onclick="showToast('🎵 Playing: Into Future', 'info')">▶</button>
+                  <button class="play-pause-btn" data-src="audio/song2.mp3" data-song="Into Future" aria-label="Play Into Future">
+                  <span class="play-icon">▶</span>
+                  </button>
+                </div>
+                <div class="music-waves" style="display:none">
+                  <span></span><span></span><span></span><span></span><span></span>
                 </div>
               </div>
               <span class="card-badge new-badge">New</span>
@@ -257,8 +267,9 @@
                 <span class="card-duration">2:10</span>
               </div>
               <div class="card-actions">
-                <button class="btn btn-primary btn-sm" onclick="showToast('🎵 Playing: Into Future', 'info')">
-                  ▶ Play
+                <button class="btn btn-primary btn-sm play-pause-btn" 
+                  data-src="audio/song2.mp3" 
+                  data-song="Midnight Drive">▶
                 </button>
                 <a href="artist.html?artist=axis-echo" class="btn-icon" title="View Artist">👤</a>
                 <button class="btn-icon fav-btn" onclick="toggleFavorite(this, 'Into Future')" title="Add to Favorites">
@@ -269,14 +280,20 @@
           </article>
 
           <!-- Featured Card 3 -->
+
           <article class="featured-card card" data-reveal>
             <div class="card-image">
               <div class="album-art art-3">
                 <div class="album-art-overlay">
-                  <button class="play-btn-large" onclick="showToast('🎵 Playing: Neon Drive', 'info')">▶</button>
+                  <button class="play-pause-btn" data-src="audio/song3.mp3" data-song="Neon Drive" aria-label="Play Neon Drive">
+                    <span class="play-icon">▶</span>
+                  </button>
+                </div>
+                <div class="music-waves" style="display:none">
+                  <span></span><span></span><span></span><span></span><span></span>
                 </div>
               </div>
-              <span class="card-badge">Hot 🔥</span>
+              <span class="card-badge new-badge">New</span>
             </div>
             <div class="card-body">
               <h3 class="card-title">Neon Drive</h3>
@@ -286,16 +303,19 @@
                 <span class="card-duration">2:49</span>
               </div>
               <div class="card-actions">
-                <button class="btn btn-primary btn-sm" onclick="showToast('🎵 Playing: Neon Drive', 'info')">
-                  ▶ Play
+                <button class="btn btn-primary btn-sm play-pause-btn" 
+                  data-src="audio/song3.mp3" 
+                  data-song="Neon Drive">▶
                 </button>
-                <a href="artist.html?artist=midnight-heist" class="btn-icon" title="View Artist">👤</a>
+                <a href="artist.html?artist=axis-echo" class="btn-icon" title="View Artist">👤</a>
                 <button class="btn-icon fav-btn" onclick="toggleFavorite(this, 'Neon Drive')" title="Add to Favorites">
                   🤍
                 </button>
               </div>
             </div>
           </article>
+
+         
 
         </div>
       </div>
@@ -422,5 +442,6 @@
   -->
   <script src="js/main.js"></script>
   <script src="js/home.js"></script>
+  <script src="js/music.js"></script>
 </body>
 </html>

@@ -1,0 +1,18 @@
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor directories
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Node (if a local dev server is used)
+node_modules/
+npm-debug.log*
+
+# Misc
+*.log
+.env

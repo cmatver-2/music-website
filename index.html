@@ -46,7 +46,10 @@
   -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/music.css"> <!-- New CSS for music page -->
   <link rel="stylesheet" href="css/responsive.css">
+  <!-- Tells browser not to request a favicon file -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♪</text></svg>">
 </head>
 
 <body>
@@ -205,61 +208,71 @@
         <div class="featured-grid">
 
           <!-- Featured Card 1 -->
+
           <article class="featured-card card" data-reveal>
             <div class="card-image">
-              <!-- Placeholder gradient background instead of real image -->
               <div class="album-art art-1">
                 <div class="album-art-overlay">
-                  <button class="play-btn-large" onclick="showToast('🎵 Playing: Midnight Drive', 'info')">
-                    ▶
+                  <button class="play-pause-btn" data-src="audio/song1.mp3" data-song="Lofi Study" aria-label="Play Lofi Study">
+                  <span class="play-icon">▶</span>
                   </button>
                 </div>
+                <div class="music-waves" style="display:none">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
               </div>
-              <span class="card-badge">Trending #1</span>
+              <span class="card-badge new-badge">Trending #1</span>
             </div>
             <div class="card-body">
-              <h3 class="card-title">Midnight Drive</h3>
-              <p class="card-artist">by Luna Rivers</p>
+              <h3 class="card-title">Lofi Study</h3>
+              <p class="card-artist">by FASS</p>
               <div class="card-meta">
                 <span class="card-genre">Lo-Fi / Chill</span>
-                <span class="card-duration">3:45</span>
+                <span class="card-duration">2:27</span>
               </div>
               <div class="card-actions">
-                <!-- onclick runs JS when clicked -->
-                <button class="btn btn-primary btn-sm" onclick="showToast('🎵 Playing: Midnight Drive', 'info')">
-                  ▶ Play
+                <button class="btn btn-primary btn-sm play-pause-btn" 
+                  data-src="audio/song1.mp3" 
+                  data-song="Lofi Study">▶
                 </button>
-                <a href="artist.html?artist=luna-rivers" class="btn-icon" title="View Artist">👤</a>
-                <button class="btn-icon fav-btn" onclick="toggleFavorite(this, 'Midnight Drive')" title="Add to Favorites">
+                <a href="artist.html?artist=FASS" class="btn-icon" title="View Artist">👤</a>
+                <button class="btn-icon fav-btn" onclick="toggleFavorite(this, 'Lofi Study')" title="Add to Favorites">
                   🤍
                 </button>
               </div>
             </div>
           </article>
 
+          
           <!-- Featured Card 2 -->
           <article class="featured-card card" data-reveal>
             <div class="card-image">
               <div class="album-art art-2">
                 <div class="album-art-overlay">
-                  <button class="play-btn-large" onclick="showToast('🎵 Playing: Solar Winds', 'info')">▶</button>
+                  <button class="play-pause-btn" data-src="audio/song2.mp3" data-song="Into Future" aria-label="Play Into Future">
+                  <span class="play-icon">▶</span>
+                  </button>
+                </div>
+                <div class="music-waves" style="display:none">
+                  <span></span><span></span><span></span><span></span><span></span>
                 </div>
               </div>
               <span class="card-badge new-badge">New</span>
             </div>
             <div class="card-body">
-              <h3 class="card-title">Solar Winds</h3>
-              <p class="card-artist">by Axis & Echo</p>
+              <h3 class="card-title">Into Future</h3>
+              <p class="card-artist">by Light Stock</p>
               <div class="card-meta">
                 <span class="card-genre">Electronic</span>
-                <span class="card-duration">4:12</span>
+                <span class="card-duration">2:10</span>
               </div>
               <div class="card-actions">
-                <button class="btn btn-primary btn-sm" onclick="showToast('🎵 Playing: Solar Winds', 'info')">
-                  ▶ Play
+                <button class="btn btn-primary btn-sm play-pause-btn" 
+                  data-src="audio/song2.mp3" 
+                  data-song="Midnight Drive">▶
                 </button>
                 <a href="artist.html?artist=axis-echo" class="btn-icon" title="View Artist">👤</a>
-                <button class="btn-icon fav-btn" onclick="toggleFavorite(this, 'Solar Winds')" title="Add to Favorites">
+                <button class="btn-icon fav-btn" onclick="toggleFavorite(this, 'Into Future')" title="Add to Favorites">
                   🤍
                 </button>
               </div>
@@ -267,33 +280,42 @@
           </article>
 
           <!-- Featured Card 3 -->
+
           <article class="featured-card card" data-reveal>
             <div class="card-image">
               <div class="album-art art-3">
                 <div class="album-art-overlay">
-                  <button class="play-btn-large" onclick="showToast('🎵 Playing: Neon Jungle', 'info')">▶</button>
+                  <button class="play-pause-btn" data-src="audio/song3.mp3" data-song="Neon Drive" aria-label="Play Neon Drive">
+                    <span class="play-icon">▶</span>
+                  </button>
+                </div>
+                <div class="music-waves" style="display:none">
+                  <span></span><span></span><span></span><span></span><span></span>
                 </div>
               </div>
-              <span class="card-badge">Hot 🔥</span>
+              <span class="card-badge new-badge">New</span>
             </div>
             <div class="card-body">
-              <h3 class="card-title">Neon Jungle</h3>
-              <p class="card-artist">by The Midnight Heist</p>
+              <h3 class="card-title">Neon Drive</h3>
+              <p class="card-artist">by Artur Aravidi</p>
               <div class="card-meta">
                 <span class="card-genre">Synthwave</span>
-                <span class="card-duration">5:08</span>
+                <span class="card-duration">2:49</span>
               </div>
               <div class="card-actions">
-                <button class="btn btn-primary btn-sm" onclick="showToast('🎵 Playing: Neon Jungle', 'info')">
-                  ▶ Play
+                <button class="btn btn-primary btn-sm play-pause-btn" 
+                  data-src="audio/song3.mp3" 
+                  data-song="Neon Drive">▶
                 </button>
-                <a href="artist.html?artist=midnight-heist" class="btn-icon" title="View Artist">👤</a>
-                <button class="btn-icon fav-btn" onclick="toggleFavorite(this, 'Neon Jungle')" title="Add to Favorites">
+                <a href="artist.html?artist=axis-echo" class="btn-icon" title="View Artist">👤</a>
+                <button class="btn-icon fav-btn" onclick="toggleFavorite(this, 'Neon Drive')" title="Add to Favorites">
                   🤍
                 </button>
               </div>
             </div>
           </article>
+
+         
 
         </div>
       </div>
@@ -390,9 +412,7 @@
         <div class="footer-col">
           <h4>Legal</h4>
           <ul>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms of Use</a></li>
-            <li><a href="#">Cookie Policy</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Use</a></li>
           </ul>
         </div>
 
@@ -400,8 +420,9 @@
 
       <!-- Copyright bar -->
       <div class="footer-bottom">
-        <p>© 2026 BeatWave. All rights reserved. Built with ❤️ for music lovers.</p>
-        <p>Made with HTML · CSS · JavaScript</p>
+        <p>Music and artist images are sourced from Pixabay and remain the property of their respective creators.
+          This project is intended for educational and non-commercial purposes
+        </p>
       </div>
     </div>
   </footer>
@@ -421,5 +442,6 @@
   -->
   <script src="js/main.js"></script>
   <script src="js/home.js"></script>
+  <script src="js/music.js"></script>
 </body>
 </html>

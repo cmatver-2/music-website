@@ -7,8 +7,8 @@
 
    Syntax:
    @media (max-width: 768px) {
-     /* These styles ONLY apply when screen ≤ 768px wide */
-   }
+     These styles ONLY apply when screen ≤ 768px wide
+    }
 
    Our breakpoints (screen size cutoffs):
    - Desktop:  > 1024px  (default styles above handle this)

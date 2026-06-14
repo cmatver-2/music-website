@@ -3,14 +3,246 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BeatWave — Artist</title>
+  <title>BeatWave — Artists</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/artist.css">
   <link rel="stylesheet" href="css/responsive.css">
-  <!-- Tells browser not to request a favicon file -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♪</text></svg>">
+  <style>
+    /* ── ARTISTS PAGE SPECIFIC STYLES ── */
+
+    /* Page intro banner */
+    .artists-hero {
+      padding: 8rem 0 4rem;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .artists-hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(124,58,237,0.12), rgba(6,182,212,0.07));
+      pointer-events: none;
+    }
+
+    .artists-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900;
+      margin-bottom: var(--space-sm);
+    }
+
+    .artists-hero p {
+      color: var(--color-text-muted);
+      font-size: 1.05rem;
+      max-width: 520px;
+      margin: 0 auto var(--space-xl);
+    }
+
+    /* Genre filter bar */
+    .artist-filters {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-top: var(--space-lg);
+    }
+
+    /* ── ARTIST GRID ── */
+    .artists-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-xl);
+    }
+
+    /* ── ARTIST CARD ── */
+    .artist-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: all var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .artist-card:hover {
+      border-color: var(--color-accent);
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-card), 0 0 0 1px var(--color-accent);
+    }
+
+    /* Card art header — uses real artist images */
+    .artist-card-art {
+      height: 200px;
+      position: relative;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center top;
+    }
+
+    .artist-card-art::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, rgba(10,10,15,0.85) 100%);
+    }
+
+    /* Genre badge overlaid on image */
+    .artist-genre-badge {
+      position: absolute;
+      top: var(--space-md);
+      left: var(--space-md);
+      padding: 3px 12px;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      z-index: 1;
+      backdrop-filter: blur(6px);
+    }
+
+    /* Genre colour coding */
+    .badge-lofi       { background: rgba(124,58,237,0.75); color: #fff; }
+    .badge-electronic { background: rgba(6,182,212,0.75);  color: #fff; }
+    .badge-synthwave  { background: rgba(236,72,153,0.75); color: #fff; }
+    .badge-pop        { background: rgba(249,115,22,0.75); color: #fff; }
+    .badge-hiphop     { background: rgba(34,197,94,0.75);  color: #fff; }
+    .badge-rock       { background: rgba(239,68,68,0.75);  color: #fff; }
+
+    /* Artist name sits on the gradient at the bottom of the image */
+    .artist-card-name-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: var(--space-md) var(--space-lg);
+      z-index: 1;
+    }
+
+    .artist-card-name-overlay h3 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+
+    .artist-card-name-overlay .artist-song {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* Card body */
+    .artist-card-body {
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      flex: 1;
+    }
+
+    /* Stats row */
+    .artist-card-stats {
+      display: flex;
+      gap: var(--space-lg);
+    }
+
+    .ac-stat {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ac-stat-num {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--color-accent);
+    }
+
+    .ac-stat-label {
+      font-size: 0.72rem;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* Short artist blurb */
+    .artist-card-bio {
+      color: var(--color-text-muted);
+      font-size: 0.88rem;
+      line-height: 1.7;
+      flex: 1;
+    }
+
+    /* Card footer: active status + link */
+    .artist-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: var(--space-md);
+      border-top: 1px solid var(--color-border);
+      margin-top: auto;
+    }
+
+    .artist-active-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      color: var(--color-success);
+      font-weight: 500;
+    }
+
+    .active-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--color-success);
+      animation: pulse 2s infinite;
+    }
+
+    .artist-pixabay-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      padding: 5px 14px;
+      border: 1px solid rgba(124,58,237,0.35);
+      border-radius: var(--radius-full);
+      transition: all var(--transition);
+    }
+
+    .artist-pixabay-link:hover {
+      background: var(--color-accent);
+      color: #fff;
+      border-color: var(--color-accent);
+    }
+
+    /* ── ARTIST IMAGES using site's existing art classes ── */
+    .acard-art-1 { background-image: url('images/FASS.webp'); }
+    .acard-art-2 { background-image: url('images/light-stock.webp'); }
+    .acard-art-3 { background-image: url('images/artur-aravidi.webp'); }
+    .acard-art-4 { background-image: url('images/paul-yudin.webp'); }
+    .acard-art-5 { background-image: url('images/the-mountain.webp'); }
+    .acard-art-6 { background-image: url('images/jonas-blakewood.webp'); }
+
+    /* ── HIDDEN (filtered out) ── */
+    .artist-card.hidden { display: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .artists-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .artists-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
@@ -38,171 +270,303 @@
 
   <main>
 
-    <!-- Artist Hero -->
-    <section class="artist-hero">
-      <div class="artist-hero-bg"></div>
+    <!-- HERO / PAGE HEADER -->
+    <section class="artists-hero">
+      <div class="artists-hero-bg"></div>
       <div class="container">
-        <div class="artist-profile" data-reveal>
+        <p class="artist-meta-tag" style="display:inline-block; margin-bottom: var(--space-md);">Independent Creators</p>
+        <h1>Meet the <span class="gradient-text">Artists</span></h1>
+        <p>Every track on BeatWave is made by an independent creator. Explore the talent behind the music.</p>
 
-          <!-- Artist Photo (gradient circle as placeholder) -->
-          <div class="artist-avatar">
-            <div class="avatar-circle">🎤</div>
-            <div class="artist-status">
-              <span class="status-dot"></span> Active Artist
-            </div>
-          </div>
-
-          <!-- Artist Info -->
-          <div class="artist-info">
-            <div class="artist-meta-tag">Featured Artist</div>
-            <h1 class="artist-name">Luna Rivers</h1>
-            <p class="artist-tagline">Lo-Fi Soul · Indie Dreamer · Kerala, India</p>
-
-            <!-- Stats -->
-            <div class="artist-stats">
-              <div class="a-stat">
-                <span class="a-stat-num">47</span>
-                <span class="a-stat-label">Songs</span>
-              </div>
-              <div class="a-stat">
-                <span class="a-stat-num">12K</span>
-                <span class="a-stat-label">Followers</span>
-              </div>
-              <div class="a-stat">
-                <span class="a-stat-num">89K</span>
-                <span class="a-stat-label">Streams</span>
-              </div>
-            </div>
-
-            <!-- Social Links -->
-            <div class="artist-social">
-              <a href="#" class="social-link" title="Instagram">📸 Instagram</a>
-              <a href="#" class="social-link" title="Twitter">🐦 Twitter</a>
-              <a href="#" class="social-link" title="YouTube">▶️ YouTube</a>
-              <a href="#" class="social-link" title="Spotify">🎵 Spotify</a>
-            </div>
-
-            <!-- Contact -->
-            <div class="artist-contact-row">
-              <span>📞 +91 98765 43210</span>
-              <span>✉️ luna@beatwave.com</span>
-            </div>
-
-            <div class="artist-hero-actions">
-              <button class="btn btn-primary" onclick="showToast('🎵 Playing Luna Rivers radio', 'info')">
-                ▶ Play All Songs
-              </button>
-              <button class="btn btn-outline" onclick="showToast('❤️ Following Luna Rivers!', 'success')">
-                + Follow
-              </button>
-            </div>
-          </div>
-
+        <!-- Genre filter buttons -->
+        <div class="artist-filters" data-reveal>
+          <button class="filter-btn active" data-filter="all">All Genres</button>
+          <button class="filter-btn" data-filter="lofi">Lo-Fi</button>
+          <button class="filter-btn" data-filter="electronic">Electronic</button>
+          <button class="filter-btn" data-filter="synthwave">Synthwave</button>
+          <button class="filter-btn" data-filter="pop">Pop</button>
+          <button class="filter-btn" data-filter="hiphop">Hip-Hop</button>
+          <button class="filter-btn" data-filter="rock">Rock</button>
         </div>
       </div>
     </section>
 
-    <!-- Artist Content -->
+    <!-- ARTISTS GRID -->
     <section class="section">
       <div class="container">
-        <div class="artist-layout">
+        <div class="artists-grid" id="artists-grid">
 
-          <!-- LEFT: Bio + Music Details -->
-          <div class="artist-main">
-
-            <!-- Biography -->
-            <div class="artist-block" data-reveal>
-              <h2 class="block-title">Biography</h2>
-              <p>
-                Luna Rivers is a Kerala-based indie artist known for her dreamy Lo-Fi compositions
-                that blend traditional South Indian melodies with modern electronic production.
-                Starting her musical journey at age 12 with classical Carnatic training, she later
-                discovered electronic music and developed a unique sound that resonates deeply
-                with listeners seeking calm in a noisy world.
-              </p>
-              <p>
-                Her debut EP <em>Monsoon Moods</em> (2022) gained over 200K streams on independent
-                platforms within its first month. She performs regularly at cafes and art spaces
-                across Kochi and Trivandrum, and collaborates with local visual artists to create
-                immersive audiovisual experiences.
-              </p>
-            </div>
-
-            <!-- Popular Songs -->
-            <div class="artist-block" data-reveal>
-              <h2 class="block-title">Popular Songs</h2>
-              <div class="song-list">
-
-                <div class="song-row">
-                  <span class="song-number">01</span>
-                  <div class="song-art art-1"></div>
-                  <div class="song-details">
-                    <span class="song-title">Midnight Drive</span>
-                    <span class="song-genre">Lo-Fi</span>
-                  </div>
-                  <span class="song-plays">89K plays</span>
-                  <span class="song-duration">3:45</span>
-                  <button class="btn-icon" onclick="showToast('🎵 Playing: Midnight Drive', 'info')" title="Play">▶</button>
-                </div>
-
-                <div class="song-row">
-                  <span class="song-number">02</span>
-                  <div class="song-art art-2"></div>
-                  <div class="song-details">
-                    <span class="song-title">Kerala Rain</span>
-                    <span class="song-genre">Ambient</span>
-                  </div>
-                  <span class="song-plays">54K plays</span>
-                  <span class="song-duration">4:20</span>
-                  <button class="btn-icon" onclick="showToast('🎵 Playing: Kerala Rain', 'info')" title="Play">▶</button>
-                </div>
-
-                <div class="song-row">
-                  <span class="song-number">03</span>
-                  <div class="song-art art-3"></div>
-                  <div class="song-details">
-                    <span class="song-title">Sleepy Harbor</span>
-                    <span class="song-genre">Lo-Fi</span>
-                  </div>
-                  <span class="song-plays">38K plays</span>
-                  <span class="song-duration">3:12</span>
-                  <button class="btn-icon" onclick="showToast('🎵 Playing: Sleepy Harbor', 'info')" title="Play">▶</button>
-                </div>
-
+          <!-- ── 1. FASS ── -->
+          <article class="artist-card" data-genre="lofi" data-reveal>
+            <div class="artist-card-art acard-art-1">
+              <span class="artist-genre-badge badge-lofi">Lo-Fi</span>
+              <div class="artist-card-name-overlay">
+                <h3>FASS</h3>
+                <span class="artist-song">🎵 Lofi Study</span>
               </div>
             </div>
-
-          </div>
-
-          <!-- RIGHT: Details sidebar -->
-          <aside class="artist-sidebar" data-reveal>
-
-            <div class="sidebar-card">
-              <h3>Music Details</h3>
-              <ul class="detail-list">
-                <li><span class="detail-label">Genre</span><span>Lo-Fi, Indie, Ambient</span></li>
-                <li><span class="detail-label">Label</span><span>Independent</span></li>
-                <li><span class="detail-label">Since</span><span>2020</span></li>
-                <li><span class="detail-label">Based in</span><span>Kochi, Kerala</span></li>
-                <li><span class="detail-label">Language</span><span>English, Malayalam</span></li>
-              </ul>
+            <div class="artist-card-body">
+              <div class="artist-card-stats">
+                <div class="ac-stat">
+                  <span class="ac-stat-num">89K</span>
+                  <span class="ac-stat-label">Streams</span>
+                </div>
+                <div class="ac-stat">
+                  <span class="ac-stat-num">1</span>
+                  <span class="ac-stat-label">Track</span>
+                </div>
+                <div class="ac-stat">
+                  <span class="ac-stat-num">Lo-Fi</span>
+                  <span class="ac-stat-label">Genre</span>
+                </div>
+              </div>
+              <p class="artist-card-bio">
+                FASS creates mellow, studious Lo-Fi beats designed for focus and relaxation.
+                "Lofi Study" is a fan favourite — steady, unhurried, and built for long sessions.
+              </p>
+              <div class="artist-card-footer">
+                <span class="artist-active-pill">
+                  <span class="active-dot"></span> Active Artist
+                </span>
+                <a
+                  href="https://pixabay.com/users/fassounds-3433550/"
+                  target="_blank"
+                  rel="noopener"
+                  class="artist-pixabay-link"
+                >
+                  View on Pixabay ↗
+                </a>
+              </div>
             </div>
+          </article>
 
-            <div class="sidebar-card">
-              <h3>Contact</h3>
-              <ul class="detail-list">
-                <li><span class="detail-label">📞 Phone</span><span>+91 98765 43210</span></li>
-                <li><span class="detail-label">✉️ Email</span><span>luna@beatwave.com</span></li>
-                <li><span class="detail-label">🌐 Website</span><a href="#" class="accent-text">lunarivers.in</a></li>
-              </ul>
-              <a href="contact.html" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:1rem">
-                Send Message
-              </a>
+          <!-- ── 2. LIGHT STOCK ── -->
+          <article class="artist-card" data-genre="electronic" data-reveal>
+            <div class="artist-card-art acard-art-2">
+              <span class="artist-genre-badge badge-electronic">Electronic</span>
+              <div class="artist-card-name-overlay">
+                <h3>Light Stock</h3>
+                <span class="artist-song">🎵 Into Future</span>
+              </div>
             </div>
+            <div class="artist-card-body">
+              <div class="artist-card-stats">
+                <div class="ac-stat">
+                  <span class="ac-stat-num">54K</span>
+                  <span class="ac-stat-label">Streams</span>
+                </div>
+                <div class="ac-stat">
+                  <span class="ac-stat-num">1</span>
+                  <span class="ac-stat-label">Track</span>
+                </div>
+                <div class="ac-stat">
+                  <span class="ac-stat-num">Electronic</span>
+                  <span class="ac-stat-label">Genre</span>
+                </div>
+              </div>
+              <p class="artist-card-bio">
+                Light Stock crafts crisp, forward-moving electronic soundscapes.
+                "Into Future" pulses with clean synths and driving rhythms that keep energy high.
+              </p>
+              <div class="artist-card-footer">
+                <span class="artist-active-pill">
+                  <span class="active-dot"></span> Active Artist
+                </span>
+                <a
+                  href="https://pixabay.com/users/lightstockmusic-42423261/"
+                  target="_blank"
+                  rel="noopener"
+                  class="artist-pixabay-link"
+                >
+                  View on Pixabay ↗
+                </a>
+              </div>
+            </div>
+          </article>
 
-          </aside>
+          <!-- ── 3. ARTUR ARAVIDI ── -->
+          <article class="artist-card" data-genre="synthwave" data-reveal>
+            <div class="artist-card-art acard-art-3">
+              <span class="artist-genre-badge badge-synthwave">Synthwave</span>
+              <div class="artist-card-name-overlay">
+                <h3>Artur Aravidi</h3>
+                <span class="artist-song">🎵 Neon Drive</span>
+              </div>
+            </div>
+            <div class="artist-card-body">
+              <div class="artist-card-stats">
+                <div class="ac-stat">
+                  <span class="ac-stat-num">38K</span>
+                  <span class="ac-stat-label">Streams</span>
+                </div>
+                <div class="ac-stat">
+                  <span class="ac-stat-num">1</span>
+                  <span class="ac-stat-label">Track</span>
+                </div>
+                <div class="ac-stat">
+                  <span class="ac-stat-num">Synthwave</span>
+                  <span class="ac-stat-label">Genre</span>
+                </div>
+              </div>
+              <p class="artist-card-bio">
+                Artur Aravidi channels retro-futuristic vibes through lush Synthwave production.
+                "Neon Drive" is a cinematic ride through glowing city streets and pulsing bass.
+              </p>
+              <div class="artist-card-footer">
+                <span class="artist-active-pill">
+                  <span class="active-dot"></span> Active Artist
+                </span>
+                <a
+                  href="https://pixabay.com/users/artur_aravidi_music-37133175/"
+                  target="_blank"
+                  rel="noopener"
+                  class="artist-pixabay-link"
+                >
+                  View on Pixabay ↗
+                </a>
+              </div>
+            </div>
+          </article>
 
+          <!-- ── 4. PAUL YUDIN ── -->
+          <article class="artist-card" data-genre="pop" data-reveal>
+            <div class="artist-card-art acard-art-4">
+              <span class="artist-genre-badge badge-pop">Pop</span>
+              <div class="artist-card-name-overlay">
+                <h3>Paul Yudin</h3>
+                <span class="artist-song">🎵 Summer Pop</span>
+              </div>
+            </div>
+            <div class="artist-card-body">
+              <div class="artist-card-stats">
+                <div class="ac-stat">
+                  <span class="ac-stat-num">72K</span>
+                  <span class="ac-stat-label">Streams</span>
+                </div>
+                <div class="ac-stat">
+                  <span class="ac-stat-num">1</span>
+                  <span class="ac-stat-label">Track</span>
+                </div>
+                <div class="ac-stat">
+                  <span class="ac-stat-num">Pop</span>
+                  <span class="ac-stat-label">Genre</span>
+                </div>
+              </div>
+              <p class="artist-card-bio">
+                Paul Yudin brings bright, feel-good Pop energy to every track. "Summer Pop"
+                is sun-soaked and instantly catchy — the kind of song that sticks after one listen.
+              </p>
+              <div class="artist-card-footer">
+                <span class="artist-active-pill">
+                  <span class="active-dot"></span> Active Artist
+                </span>
+                <a
+                  href="https://pixabay.com/users/paulyudin-27739282/"
+                  target="_blank"
+                  rel="noopener"
+                  class="artist-pixabay-link"
+                >
+                  View on Pixabay ↗
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- ── 5. THE MOUNTAIN ── -->
+          <article class="artist-card" data-genre="hiphop" data-reveal>
+            <div class="artist-card-art acard-art-5">
+              <span class="artist-genre-badge badge-hiphop">Hip-Hop</span>
+              <div class="artist-card-name-overlay">
+                <h3>The Mountain</h3>
+                <span class="artist-song">🎵 Chill Hiphop</span>
+              </div>
+            </div>
+            <div class="artist-card-body">
+              <div class="artist-card-stats">
+                <div class="ac-stat">
+                  <span class="ac-stat-num">61K</span>
+                  <span class="ac-stat-label">Streams</span>
+                </div>
+                <div class="ac-stat">
+                  <span class="ac-stat-num">1</span>
+                  <span class="ac-stat-label">Track</span>
+                </div>
+                <div class="ac-stat">
+                  <span class="ac-stat-num">Hip-Hop</span>
+                  <span class="ac-stat-label">Genre</span>
+                </div>
+              </div>
+              <p class="artist-card-bio">
+                The Mountain layers soulful Hip-Hop grooves with laid-back beats that move
+                without rushing. "Chill Hiphop" is smooth, steady, and made for late-night drives.
+              </p>
+              <div class="artist-card-footer">
+                <span class="artist-active-pill">
+                  <span class="active-dot"></span> Active Artist
+                </span>
+                <a
+                  href="https://pixabay.com/users/the_mountain-3616498/"
+                  target="_blank"
+                  rel="noopener"
+                  class="artist-pixabay-link"
+                >
+                  View on Pixabay ↗
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- ── 6. JONAS BLAKEWOOD ── -->
+          <article class="artist-card" data-genre="rock" data-reveal>
+            <div class="artist-card-art acard-art-6">
+              <span class="artist-genre-badge badge-rock">Rock</span>
+              <div class="artist-card-name-overlay">
+                <h3>Jonas Blakewood</h3>
+                <span class="artist-song">🎵 Indie Rock</span>
+              </div>
+            </div>
+            <div class="artist-card-body">
+              <div class="artist-card-stats">
+                <div class="ac-stat">
+                  <span class="ac-stat-num">47K</span>
+                  <span class="ac-stat-label">Streams</span>
+                </div>
+                <div class="ac-stat">
+                  <span class="ac-stat-num">1</span>
+                  <span class="ac-stat-label">Track</span>
+                </div>
+                <div class="ac-stat">
+                  <span class="ac-stat-num">Rock</span>
+                  <span class="ac-stat-label">Genre</span>
+                </div>
+              </div>
+              <p class="artist-card-bio">
+                Jonas Blakewood brings raw indie guitar energy with melodic grit. "Indie Rock"
+                hits hard but stays musical — the sound of a band playing like they mean it.
+              </p>
+              <div class="artist-card-footer">
+                <span class="artist-active-pill">
+                  <span class="active-dot"></span> Active Artist
+                </span>
+                <a
+                  href="https://pixabay.com/users/jonasblakewood-48502311/"
+                  target="_blank"
+                  rel="noopener"
+                  class="artist-pixabay-link"
+                >
+                  View on Pixabay ↗
+                </a>
+              </div>
+            </div>
+          </article>
+
+        </div><!-- /artists-grid -->
+
+        <!-- No results message -->
+        <div id="no-artist-results" style="display:none; text-align:center; padding: var(--space-3xl); color: var(--color-text-muted); font-size:1.1rem;">
+          😕 No artists found for that genre.
         </div>
+
       </div>
     </section>
 
@@ -235,7 +599,7 @@
       </div>
       <div class="footer-bottom">
         <p>Music and artist images are sourced from Pixabay and remain the property of their respective creators.
-          This project is intended for educational and non-commercial purposes
+          This project is intended for educational and non-commercial purposes.
         </p>
       </div>
     </div>
@@ -243,5 +607,36 @@
 
   <div class="toast-container"></div>
   <script src="js/main.js"></script>
+  <script>
+    // ── ARTIST GENRE FILTER ──────────────────────────────────
+    // Same pattern as music.js — reads data-genre from each card
+    // and shows/hides based on the active filter button.
+    document.addEventListener('DOMContentLoaded', function () {
+
+      const filterBtns    = document.querySelectorAll('.artist-filters .filter-btn');
+      const artistCards   = document.querySelectorAll('.artist-card');
+      const noResults     = document.getElementById('no-artist-results');
+
+      filterBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          // Update active button
+          filterBtns.forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+
+          const genre = btn.dataset.filter;
+          let visible = 0;
+
+          artistCards.forEach(function (card) {
+            const match = genre === 'all' || card.dataset.genre === genre;
+            card.classList.toggle('hidden', !match);
+            if (match) visible++;
+          });
+
+          noResults.style.display = visible === 0 ? 'block' : 'none';
+        });
+      });
+
+    });
+  </script>
 </body>
 </html>

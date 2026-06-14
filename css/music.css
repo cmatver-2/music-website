@@ -92,13 +92,12 @@
   overflow: hidden;
 }
 
-/* Color gradients for each card (since we have no real images) */
-.art-1 { background: linear-gradient(135deg, #667eea, #764ba2); }
-.art-2 { background: linear-gradient(135deg, #f093fb, #f5576c); }
-.art-3 { background: linear-gradient(135deg, #4facfe, #00f2fe); }
-.art-4 { background: linear-gradient(135deg, #43e97b, #38f9d7); }
-.art-5 { background: linear-gradient(135deg, #fa709a, #fee140); }
-.art-6 { background: linear-gradient(135deg, #a18cd1, #fbc2eb); }
+.art-1 { background-image: url('../images/FASS.webp'); background-size: cover; background-position: center; }
+.art-2 { background-image: url('../images/light-stock.webp'); background-size: cover; background-position: center; }
+.art-3 { background-image: url('../images/artur-aravidi.webp'); background-size: cover; background-position: center; }
+.art-4 { background-image: url('../images/paul-yudin.webp'); background-size: cover; background-position: center; }
+.art-5 { background-image: url('../images/the-mountain.webp'); background-size: cover; background-position: center; }
+.art-6 { background-image: url('../images/jonas-blakewood.webp'); background-size: cover; background-position: center; }
 
 .art-overlay {
   position: absolute;
@@ -122,6 +121,7 @@
   background: rgba(255,255,255,0.9);
   color: var(--color-accent);
   font-size: 1.3rem;
+  white-space: nowrap;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -129,6 +129,10 @@
   cursor: pointer;
   transition: transform var(--transition);
   font-weight: bold;
+  line-height: 1;            /* ADD: prevents line height from pushing content */
+  padding: 0;                /* ADD: removes any default button padding */
+  text-align: center;        /* ADD: fallback centering */
+  letter-spacing: 0;         /* ADD: ▶ has extra spacing in some fonts */
 }
 
 .play-pause-btn:hover { transform: scale(1.1); }
@@ -141,6 +145,10 @@
 
 .music-card.playing .art-overlay {
   opacity: 1; /* Always show overlay when playing */
+}
+
+.featured-card.playing .album-art-overlay {
+  opacity: 1;
 }
 
 /* Sound wave animation (shows when playing) */

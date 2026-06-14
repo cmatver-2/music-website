@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const songName = btn.dataset.song;
 
       // Find the parent card (closest ancestor with .music-card class)
-      const card = btn.closest('.music-card');
+      const card = btn.closest('.music-card,.featured-card');
 
       // ── Logic: Is this song already playing? ──
       if (currentlyPlayingCard === card && !audioPlayer.paused) {
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const icon = b.querySelector('.play-icon');
         if (icon) icon.textContent = '⏸';         // Change ▶ to ⏸
         if (b.tagName === 'BUTTON' && b.classList.contains('btn-primary')) {
-          b.textContent = '⏸ Pause';
+          b.textContent = '⏸';
         }
       });
       if (waves) waves.style.display = 'flex';    // Show sound waves
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const icon = b.querySelector('.play-icon');
       if (icon) icon.textContent = '▶';
       if (b.tagName === 'BUTTON' && b.classList.contains('btn-primary')) {
-        b.textContent = '▶ Play';
+        b.textContent = '▶';
       }
     });
 
@@ -208,6 +208,17 @@ document.addEventListener('DOMContentLoaded', function () {
     // Show/hide "no results" message
     if (noResults) {
       noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+  }
+
+  // Read genre from URL and activate filter on page load
+  // e.g. music.html?genre=pop → activates the "Pop" filter
+  const urlParams = new URLSearchParams(window.location.search);
+  const genreParam = urlParams.get('genre');
+  if (genreParam) {
+    const matchingBtn = document.querySelector(`.filter-btn[data-filter="${genreParam}"]`);
+    if (matchingBtn) {
+      matchingBtn.click(); // Simulate a click to activate the filter
     }
   }
 

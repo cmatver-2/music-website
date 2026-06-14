@@ -13,6 +13,10 @@
    Don't Repeat Yourself.
    ============================================================ */
 
+   
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap');
+
 /* --- 1. CSS VARIABLES (Design Tokens) ---------------------- */
 :root {
   /* Colors */
@@ -95,9 +99,6 @@ body {
   overflow-x: hidden;        /* Prevent horizontal scroll */
   transition: background-color var(--transition), color var(--transition);
 }
-
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap');
 
 /* Links — remove default underline, inherit color */
 a {
